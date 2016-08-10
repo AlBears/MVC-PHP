@@ -1,7 +1,6 @@
 <?php
 
-require_once dirname(__DIR__) . '/vendor/twig/twig/lib/Twig/Autoloader.php';
-Twig_Autoloader::register();
+require '../vendor/autoload.php';
 
 //Autoload Added
 spl_autoload_register(function ($class) {
