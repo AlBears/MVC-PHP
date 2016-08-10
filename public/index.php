@@ -1,4 +1,8 @@
 <?php
+
+require_once '../vendor/Twig/lib/Twig/Autoloader.php';
+Twig_Autoloader::register();
+
 //Autoload Added
 spl_autoload_register(function ($class) {
     $root = dirname(__DIR__);   // get the parent directory
