@@ -6,6 +6,10 @@ Twig_Autoloader::register();
 
 $router = new Core\Router();
 
+//Error handling
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
+
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('{controller}/{action}');
