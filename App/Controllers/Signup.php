@@ -2,22 +2,20 @@
 
 namespace App\Controllers;
 use \Core\View;
+use \App\Models\User;
 
 class Signup extends \Core\Controller
 {
 
-    protected function before()
-    {
-        //echo "(before) ";
-    }
-
-    protected function after()
-    {
-        //echo " (after)";
-    }
-
     public function newAction()
     {
         View::renderTemplate('Signup/index.html');
+    }
+
+    public function createAction()
+    {
+        $user = new User($_POST);
+        $user->save();
+        View::renderTemplate('Signup/success.html');
     }
 }
