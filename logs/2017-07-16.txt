@@ -1,0 +1,5 @@
+[16-Jul-2017 10:11:29 Europe/Berlin] Uncaught exception: 'Exception' with message 'Method newAction not found in controller App\Controllers\Signup'
+Stack trace: #0 /Users/masusl/Documents/CODE/PHP/MVC/Core/Router.php(76): Core\Controller->__call('new', Array)
+#1 /Users/masusl/Documents/CODE/PHP/MVC/public/index.php(20): Core\Router->dispatch('signup/new')
+#2 {main}
+Thrown in '/Users/masusl/Documents/CODE/PHP/MVC/Core/Controller.php' on line 27
