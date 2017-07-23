@@ -6,7 +6,7 @@ namespace Core;
 abstract class Controller
 {
 
-    
+
     protected $route_params = [];
 
     public function __construct($route_params)
@@ -29,13 +29,19 @@ abstract class Controller
         }
     }
 
-    
+
     protected function before()
     {
     }
 
-    
+
     protected function after()
     {
+    }
+
+    public function redirect($url)
+    {
+      header('Location: http://' . $_SERVER['HTTP_HOST'] . '/', true, 303);
+      exit;
     }
 }
