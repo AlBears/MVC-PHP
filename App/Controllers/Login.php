@@ -31,7 +31,7 @@ class Login extends \Core\Controller
         $user = User::authenticate($_POST['email'], $_POST['password']);
 
         if ($user) {
-
+            $_SESSION['user_id'] = $user->id;
             $this->redirect('/');
 
         } else {
