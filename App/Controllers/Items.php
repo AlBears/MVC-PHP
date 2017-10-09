@@ -6,9 +6,13 @@ use \App\Auth;
 
 class Items extends \Core\Controller
 {
-  public function indexAction()
+  protected function before()
   {
     $this->requireLogin();
+  }
+
+  public function indexAction()
+  {
     View::renderTemplate('Items/index.html');
   }
 }
