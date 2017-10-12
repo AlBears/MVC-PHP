@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 use \Core\View;
+use \App\Auth;
 
 class Home extends \Core\Controller
 {
-	
+
     protected function before()
     {
-        //echo "(before) ";    
+        //echo "(before) ";
     }
 
     protected function after()
@@ -18,9 +19,6 @@ class Home extends \Core\Controller
 
     public function indexAction()
     {
-        View::renderTemplate('Home/index.html', [
-            'name'    => 'Dave',
-            'colours' => ['red', 'green', 'blue']
-        ]);
+        View::renderTemplate('Home/index.html');
     }
 }
