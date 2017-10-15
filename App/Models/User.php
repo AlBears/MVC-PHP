@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use App\Token;
 
 /**
  * Example user model
@@ -34,28 +35,28 @@ class User extends \Core\Model
    * @return void
    */
    public function save()
-     {
-         $this->validate();
+   {
+     $this->validate();
 
-         if (empty($this->errors)) {
+     if (empty($this->errors)) {
 
-             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-             $sql = 'INSERT INTO users (name, email, password_hash)
-                     VALUES (:name, :email, :password_hash)';
+         $sql = 'INSERT INTO users (name, email, password_hash)
+                 VALUES (:name, :email, :password_hash)';
 
-             $db = static::getDB();
-             $stmt = $db->prepare($sql);
+         $db = static::getDB();
+         $stmt = $db->prepare($sql);
 
-             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-             $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+         $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+         $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+         $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
 
-             return $stmt->execute();
-         }
-
-         return false;
+         return $stmt->execute();
      }
+
+     return false;
+   }
   /**
      * Validate current property values, adding valiation error messages to the errors array property
      *
@@ -164,6 +165,27 @@ class User extends \Core\Model
        $stmt->execute();
 
        return $stmt->fetch();
+     }
+
+     public function rememberLogin()
+     {
+       $token = new Token();
+       $hashed_token = $token->getHash();
+
+       $expiry_timestamp = time() + 60 * 60 * 24 * 30; //30 days from now
+
+       $sql = 'INSERT INTO remembered_logins (token_hash, user_id, expires_at)
+              VALUES (:token_hash, :user_id, :expires_at)';
+
+       $db = static::getDB();
+       $stmt = $db->prepare($sql);
+
+       $stmt->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
+       $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+       $stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $expiry_timestamp), PDO::PARAM_STR);
+
+       return $stmt->execute();
+
      }
 
 }

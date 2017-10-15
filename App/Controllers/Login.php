@@ -35,7 +35,7 @@ class Login extends \Core\Controller
         $remember_me = isset($_POST['remember_me']);
 
         if ($user) {
-            Auth::login($user);
+            Auth::login($user, $remember_me);
 
             Flash::addMessage('Login successful');
 
