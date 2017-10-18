@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use PDO;
 use \App\Token;
 
 class RememberedLogin extends \Core\Model
@@ -10,7 +11,7 @@ class RememberedLogin extends \Core\Model
     $token = new Token($token);
     $token_hash = $token->getHash();
 
-    $sql = 'SELECT * FROM rememered_logins
+    $sql = 'SELECT * FROM remembered_logins
             WHERE token_hash = :token_hash';
 
     $db = static::getDB();
@@ -28,4 +29,9 @@ class RememberedLogin extends \Core\Model
   {
     return User::findByID($this->user_id);
   }
+
+  public function hasExpired()
+    {
+      return strtotime($this->expires_at) < time();
+    }
 }
