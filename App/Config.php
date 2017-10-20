@@ -17,4 +17,8 @@ class Config
     const SHOW_ERRORS = false;
 
     const SECRET_KEY = 'niOaOctNKqC91aY3yzC3O7PUaEaqrX7x';
+
+    const MAILGUN_API_KEY = '';
+
+    const MAILGUN_DOMAIN = '';
 }
