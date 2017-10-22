@@ -189,4 +189,13 @@ class User extends \Core\Model
 
      }
 
+     public static function sendPasswordReset($email)
+     {
+       $user = static::findByEmail($email);
+
+       if ($user) {
+         //Start password reset process
+       }
+     }
+
 }
