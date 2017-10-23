@@ -13,8 +13,10 @@ class Password extends \Core\Controller
 
   public function requestResetAction()
   {
-    //User::sendPasswordReset($_POST['email']);
+
+    User::sendPasswordReset($_POST['email']);
 
     View::renderTemplate('Password/reset_requested.html');
+
   }
 }
