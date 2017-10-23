@@ -1,9 +1,0 @@
-[17-Aug-2016 17:22:32 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
-Stack trace: #0 /Users/masusl/Documents/CODE/PHP/MVC/public/index.php(21): Core\Router->dispatch('dfsdfsdfsfs')
-#1 {main}
-Thrown in '/Users/masusl/Documents/CODE/PHP/MVC/Core/Router.php' on line 82
-[17-Aug-2016 17:23:24 Europe/Berlin] Uncaught exception: 'Exception' with message 'Method sddsAction not found in controller App\Controllers\Posts'
-Stack trace: #0 /Users/masusl/Documents/CODE/PHP/MVC/Core/Router.php(76): Core\Controller->__call('sdds', Array)
-#1 /Users/masusl/Documents/CODE/PHP/MVC/public/index.php(21): Core\Router->dispatch('posts/sdds')
-#2 {main}
-Thrown in '/Users/masusl/Documents/CODE/PHP/MVC/Core/Controller.php' on line 27

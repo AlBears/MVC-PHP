@@ -28,7 +28,7 @@ class Mail
         $mg = new Mailgun(Config::MAILGUN_API_KEY);
         $domain = Config::MAILGUN_DOMAIN;
 
-        $mg->sendMessage($domain, ['from'    => 'MVC',
+        $mg->sendMessage($domain, ['from'    => 'mvc@mvc.com',
                                    'to'      => $to,
                                    'subject' => $subject,
                                    'text'    => $text,
