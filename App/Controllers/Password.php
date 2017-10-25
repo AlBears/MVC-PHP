@@ -24,34 +24,36 @@ class Password extends \Core\Controller
   {
     $token = $this->route_params['token'];
 
-    $user = User::findByPasswordReset($token);
+    $user = $this->getUserOrExit($token);
 
-    if ($user) {
-
-      View::renderTemplate('Password/reset.html', [
+    View::renderTemplate('Password/reset.html', [
         'token' => $token
+
       ]);
-
-    } else {
-
-      echo 'password reset token invalid';
-
-    }
   }
 
   public function resetPasswordAction()
   {
     $token = $_POST['token'];
 
+    $user = $this->getUserOrExit($token);
+
+    echo 'reset password here';
+
+  }
+
+  protected function getUserOrExit($token)
+  {
     $user = User::findByPasswordReset($token);
 
     if ($user) {
 
-      echo 'reset password here';
+      return $user;
 
     } else {
 
-      echo 'password reset token invalid';
+      View::renderTemplate('Password/token_expired.html');
+      exit;
 
     }
   }
