@@ -46,6 +46,7 @@ class User extends \Core\Model
 
          $token = new Token();
          $hashed_token = $token->getHash();
+         $this->activation_token = $token->getValue();
 
          $sql = 'INSERT INTO users (name, email, password_hash, activation_hash)
                  VALUES (:name, :email, :password_hash, :activation_hash)';
@@ -306,6 +307,16 @@ class User extends \Core\Model
        }
 
        return false;
+     }
+
+     public function sendActivationEmail()
+     {
+       $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+
+       $text = View::getTemplate('Password/activation_email.txt', ['url' => $url]);
+       $html = View::getTemplate('Password/activation_email.html', ['url' => $url]);
+
+       Mail::send($this->email, 'Account Activation', $text, $html);
      }
 
 }
