@@ -5,18 +5,30 @@
 {% block footer %}
 
   <script type="text/javascript" src="/js/hideShowPassword.min.js"></script>
-  <script type="text/javascript" src="/js/app.min.js"></script>
+  <script type="text/javascript" src="/js/app.js"></script>
 
     <script>
 
       $(document).ready(function() {
+
+        var userId = '{{ user.id }}';
+        console.log(userId);
+
         $('#formProfile').validate({
           rules: {
             name: 'required',
             email: {
               required: true,
               email: true,
-              remote: '/account/validate-email'
+              remote: {
+                  url: '/account/validate-email',
+                  data: {
+                      ignore_id: function() {
+                          return userId;
+                      }
+                  }
+              }
+              
             },
             password: {
               required: true,
